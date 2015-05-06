@@ -2,7 +2,6 @@
 namespace Sopinet\UserPreferencesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Exclude;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Doctrine\ORM\Event\OnFlushEventArgs;
  
@@ -43,7 +42,6 @@ class UserSetting
     
     /**
      * @ORM\OneToMany(targetEntity="UserValue", mappedBy="setting")
-     * @Exclude
      */
     protected $uservalues;    
     

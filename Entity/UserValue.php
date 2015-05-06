@@ -2,7 +2,6 @@
 namespace Sopinet\UserPreferencesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Exclude;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Doctrine\ORM\Event\OnFlushEventArgs;
  
@@ -21,9 +20,8 @@ class UserValue
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Sopinet\UserBundle\Entity\SopinetUserExtend", inversedBy="uservalues")
+     * @ORM\ManyToOne(targetEntity="Application\Sopinet\UserBundle\Entity\User", inversedBy="uservalues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     * @Exclude
      */
     protected $user;
     
@@ -74,10 +72,10 @@ class UserValue
     /**
      * Set user
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @param Application\Sopinet\UserBundle\Entity\User $user
      * @return UserValue
      */
-    public function setUser(\Sopinet\UserBundle\Entity\SopinetUserExtend $user = null)
+    public function setUser(Application\Sopinet\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -87,7 +85,7 @@ class UserValue
     /**
      * Get user
      *
-     * @return \Application\Sonata\UserBundle\Entity\User 
+     * @return Application\Sopinet\UserBundle\Entity\User
      */
     public function getUser()
     {

@@ -8,14 +8,14 @@
 		 * Obtiene el valor de un usuario para una configuración
 		 * Si existe la configuración la devuelve, sino, retorna el valor por defecto.
 		 * 
-		 * @param SopinetUserExtend <Entity> $sopinetuserextend
+		 * @param Application\Sopinet\UserBundle\Entity\User <Entity> $sopinetuserextend
 		 * @param UserSetting <Entity> $usersetting
 		 * @return string Value
 		 */
-		public function getValue($sopinetuserextend, $usersetting) {
+		public function getValue($user, $usersetting) {
 			$em = $this->getEntityManager();
 			$reUserValue = $em->getRepository("SopinetUserPreferencesBundle:UserValue");
-			$findUV = $reUserValue->findOneBy(array('user' => $sopinetuserextend, 'setting' => $usersetting));
+			$findUV = $reUserValue->findOneBy(array('user' => $user, 'setting' => $usersetting));
 			if ($findUV == null) {
 				return $usersetting->getDefaultoption();
 			} else {
@@ -26,7 +26,7 @@
 		/**
 		 * Guarda un valor de configuración para un usuario
 		 * 
-		 * @param User <Entity> $user
+		 * @param Application\Sopinet\UserBundle\Entity\User <Entity> $user
 		 * @param Integer $usersetting_id
 		 * @param String $value
 		 * @return UserValue
@@ -58,7 +58,7 @@
 				
 				$query = $em->createQuery(
 						'SELECT u.id
-    					FROM SopinetUserBundle:SopinetUserExtend u, SopinetUserPreferencesBundle:UserValue uv
+    					FROM SopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
     					WHERE uv.setting = :setting AND uv.value <> :default AND uv.user = u'
 				)->setParameters(array('setting'=>$usersetting->getId(), 'default'=>$usersetting->getDefaultoption()));
 			
@@ -66,7 +66,7 @@
 
 				if (count($nots) == 0) {
 					$users = $qb->select('u')
-					->from('SopinetUserBundle:SopinetUserExtend', 'u')
+					->from('SopinetUserBundle:User', 'u')
 					->getQuery()
 					->getResult();
 				} else {
@@ -78,7 +78,7 @@
 					}
 					
 					$users = $qb->select('u')
-					->from('SopinetUserBundle:SopinetUserExtend', 'u')
+					->from('SopinetUserBundle:User', 'u')
 					->where($qb->expr()->notIn('u', $nots_string))
 					->getQuery()
 					->getResult();
@@ -87,7 +87,7 @@
 			} else {
 				$query = $em->createQuery(
 						'SELECT u
-    					FROM SopinetUserBundle:SopinetUserExtend u, SopinetUserPreferencesBundle:UserValue uv
+    					FROM SopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
     					WHERE uv.setting = :setting AND uv.value = :select AND uv.user = u'
 				)->setParameters(array('setting'=>$usersetting->getId(), 'select'=>$value));
 				$users = $query->getResult();

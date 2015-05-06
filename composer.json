@@ -22,7 +22,7 @@
         "php": ">=5.4.0"
     },
     "autoload": {
-        "psr-0": { "Sopinet\\UserSettingsBundle": "" }
+        "psr-0": { "Sopinet\\UserPreferencesBundle": "" }
     },
-    "target-dir": "Sopinet/UserSettingsBundle"
+    "target-dir": "Sopinet/UserPreferencesBundle"
 }
