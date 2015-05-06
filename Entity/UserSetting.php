@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace Sopinet\UserPreferencesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Doctrine\ORM\Event\OnFlushEventArgs;
- 
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="user_setting")
@@ -18,37 +18,43 @@ class UserSetting
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="type", type="string", length=255)
      * // Enum
-     */    
+     */
     protected $type;
-    
+
     /**
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
-    
+
     /**
      * @ORM\Column(name="icon", type="string", length=255)
      */
-    protected $icon;    
+    protected $icon;
 
     /**
      * @ORM\Column(name="options", type="string", length=500)
      */
     protected $options;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="UserValue", mappedBy="setting")
      */
-    protected $uservalues;    
-    
+    protected $uservalues;
+
+
+    /**
+     * @ORM\Column(name="multiple", type="boolean")
+     */
+    protected $multiple=false;
+
     /**
      * @ORM\Column(name="defaultoption", type="string", length=255)
      */
-    protected $defaultoption;    
+    protected $defaultoption;
     /**
      * Constructor
      */
@@ -56,11 +62,11 @@ class UserSetting
     {
         $this->uservalues = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,14 +82,14 @@ class UserSetting
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -99,14 +105,14 @@ class UserSetting
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -122,14 +128,14 @@ class UserSetting
     public function setOptions($options)
     {
         $this->options = $options;
-    
+
         return $this;
     }
 
     /**
      * Get options
      *
-     * @return string 
+     * @return string
      */
     public function getOptions()
     {
@@ -145,7 +151,7 @@ class UserSetting
     public function addUservalue(UserValue $uservalues)
     {
         $this->uservalues[] = $uservalues;
-    
+
         return $this;
     }
 
@@ -162,7 +168,7 @@ class UserSetting
     /**
      * Get uservalues
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUservalues()
     {
@@ -178,31 +184,31 @@ class UserSetting
     public function setIcon($icon)
     {
         $this->icon = $icon;
-    
+
         return $this;
     }
 
     /**
      * Get icon
      *
-     * @return string 
+     * @return string
      */
     public function getIcon()
     {
         return $this->icon;
     }
-    
+
     public function getOptionsArr() {
-    	return explode(",", $this->getOptions());
+        return explode(",", $this->getOptions());
     }
-    
+
     public function getOptionsCont() {
-    	return count($this->getOptionsArr());
+        return count($this->getOptionsArr());
     }
-    
+
     public function getDescription()
     {
-    	return $this->getName() . ".description";
+        return $this->getName() . ".description";
     }
 
     /**
@@ -214,17 +220,41 @@ class UserSetting
     public function setDefaultoption($defaultoption)
     {
         $this->defaultoption = $defaultoption;
-    
+
         return $this;
     }
 
     /**
      * Get defaultoption
      *
-     * @return string 
+     * @return string
      */
     public function getDefaultoption()
     {
         return $this->defaultoption;
+    }
+
+    /**
+     * Set multiple
+     *
+     * @param boolean $multiple
+     *
+     * @return UserSetting
+     */
+    public function setMultiple($multiple)
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    /**
+     * Get multiple
+     *
+     * @return boolean
+     */
+    public function getMultiple()
+    {
+            return $this->multiple;
     }
 }

@@ -31,7 +31,7 @@
 				{% for setting in settings %}
 				<div id="setting_tab_{{ setting.id }}" class="fade tab-pane{% if i == 0 %} in active{% endif %}">
 					<div class="row-fluid">
-						<span class="span7">{{ ("preference."~setting.description)|trans|raw }}</span>
+						<span class="span7">{{ ("preference."~setting.description)|trans }}</span>
 						<span class="span5">
 							{% if setting.type == "Enum" %}
 							{#
@@ -41,17 +41,12 @@
 										<span class="lbl"></span>
 									</label>						
 								{% else %}
-							#}								
-									<div class="control-group">
-										<div class="controls">
-										{% for value in setting.optionsarr %}
-											<label>
-												<input {% if (app.user.sopinetuserextend|getUserValue(setting)) == value %}checked="checked" {% endif %}name="setting_{{ setting.id }}" type="radio" class="ace" value="{{ value }}"/>
-												<span class="lbl">{{ ("preference."~setting.name~".value."~value)|trans }}</span>
-											</label>
-										{% endfor %}
-										</div>
-									</div>
+							#}			
+									{%if not setting.multiple %}					
+										{% include 'SopinetUserPreferencesBundle:Includes:_simple_setting.html.twig' %}
+									{%else%}
+										{% include 'SopinetUserPreferencesBundle:Includes:_multiple_setting.html.twig' %}
+									{% endif %}
 							{#	{% endif %} #}
 							{% endif %}
 						</span>
