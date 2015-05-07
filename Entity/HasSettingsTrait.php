@@ -1,6 +1,5 @@
 <?php
 namespace Sopinet\UserPreferencesBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Created by PhpStorm.
  * User: hud
@@ -31,7 +30,7 @@ trait HasSettingsTrait
         return $this->uservalues;
     }
 
-    public function setUserValues(ArrayCollection $userValues)
+    public function setUserValues($userValues)
     {
         $this->uservalues = $userValues;
 
