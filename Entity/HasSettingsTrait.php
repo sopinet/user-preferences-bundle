@@ -1,5 +1,6 @@
 <?php
 namespace Sopinet\UserPreferencesBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Created by PhpStorm.
  * User: hud
