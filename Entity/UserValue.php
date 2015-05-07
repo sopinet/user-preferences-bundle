@@ -20,7 +20,7 @@ class UserValue
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sopinet\UserBundle\Entity\User", inversedBy="uservalues")
+     * @ORM\ManyToOne(targetEntity="\Application\Sopinet\UserBundle\Entity\User", inversedBy="uservalues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $user;
@@ -72,10 +72,10 @@ class UserValue
     /**
      * Set user
      *
-     * @param Application\Sopinet\UserBundle\Entity\User $user
+     * @param \Application\Sopinet\UserBundle\Entity\User $user
      * @return UserValue
      */
-    public function setUser(Application\Sopinet\UserBundle\Entity\User $user = null)
+    public function setUser(\Application\Sopinet\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -85,7 +85,7 @@ class UserValue
     /**
      * Get user
      *
-     * @return Application\Sopinet\UserBundle\Entity\User
+     * @return \Application\Sopinet\UserBundle\Entity\User
      */
     public function getUser()
     {
