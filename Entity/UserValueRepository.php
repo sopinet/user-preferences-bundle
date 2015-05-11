@@ -63,7 +63,7 @@ class UserValueRepository extends EntityRepository
 
             $query = $em->createQuery(
                 'SELECT u.id
-    					FROM SopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
+    					FROM ApplicationSopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
     					WHERE uv.setting = :setting AND uv.value <> :default AND uv.user = u'
             )->setParameters(array('setting'=>$usersetting->getId(), 'default'=>$usersetting->getDefaultoption()));
 
@@ -71,7 +71,7 @@ class UserValueRepository extends EntityRepository
 
             if (count($nots) == 0) {
                 $users = $qb->select('u')
-                    ->from('SopinetUserBundle:User', 'u')
+                    ->from('ApplicationSopinetUserBundle:User', 'u')
                     ->getQuery()
                     ->getResult();
             } else {
@@ -92,7 +92,7 @@ class UserValueRepository extends EntityRepository
         } else {
             $query = $em->createQuery(
                 'SELECT u
-    					FROM SopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
+    					FROM ApplicationSopinetUserBundle:User u, SopinetUserPreferencesBundle:UserValue uv
     					WHERE uv.setting = :setting AND uv.value = :select AND uv.user = u'
             )->setParameters(array('setting'=>$usersetting->getId(), 'select'=>$value));
             $users = $query->getResult();

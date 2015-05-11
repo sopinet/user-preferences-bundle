@@ -1,0 +1,71 @@
+
+<!-- Se podría mirar una forma más elegante de aplicar estos mínimos estilos -->
+<style>
+    .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    .nav-tabs { margin-bottom: -1px; }
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<div class="row-fluid">
+    <!--PAGE CONTENT BEGINS HERE-->
+    <form class="form-horizontal" action="{{ path('panel_user_settings_save') }}" method="POST"/>
+    <div class="tabbable">
+        <ul class="nav nav-tabs" id="setting_tab">
+            {% set i = 0 %}
+            {% for setting in settings %}
+                <li{% if i == 0 %} class="active"{% endif %}>
+                    <a data-toggle="tab" href="#setting_tab_{{ setting.id }}">
+                        <i class="icon-{{ setting.icon }}"></i>
+                        {{ ("preference."~setting.name~".name")|trans }}
+                    </a>
+                </li>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content">
+            {% set i = 0 %}
+            {% for setting in settings %}
+                <div id="setting_tab_{{ setting.id }}" class="fade tab-pane{% if i == 0 %} in active{% endif %}">
+                    <div class="row-fluid">
+                        <span class="span7">{{ ("preference."~setting.description)|trans }}</span>
+						<span class="span5">
+							{% if setting.type == "Enum" %}
+                                {#
+                                    {% if setting.optionscont == 2 %}
+                                        <label>
+                                            <input name="setting_{{ setting.id }}" class="ace ace-switch" type="checkbox" checked="checked"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    {% else %}
+                                #}
+                                {%if not setting.multiple %}
+                                    {% include 'SopinetUserPreferencesBundle:Includes:_simple_setting.html.twig' %}
+                                {%else%}
+                                    {% include 'SopinetUserPreferencesBundle:Includes:_multiple_setting.html.twig' %}
+                                {% endif %}
+                                {#	{% endif %} #}
+                            {% endif %}
+						</span>
+                    </div>
+                </div>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <br />
+    <div class="row-fluid">
+        <button class="btn btn-success" type="submit">
+            <i class="fa fa-save"></i>&nbsp;
+            {{ "Btn.success"|trans }}
+        </button>
+    </div>
+
+    </form>
+</div>

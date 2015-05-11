@@ -1,6 +1,6 @@
 {
     "name": "sopinet/user-preferences-bundle",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Symfony2 Bundle - Symple system for user settings",
     "keywords": ["settings", "user", "symfony2", "bundle"],
     "type": "symfony-bundle",

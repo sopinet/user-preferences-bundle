@@ -1,3 +1,6 @@
-sopinet_user_preferences_homepage:
-    path:  /hello/{name}
-    defaults: { _controller: SopinetUserPreferencesBundle:Default:index }
+panel_user_preferences_edit:
+    path:  /edit
+    defaults: { _controller: SopinetUserPreferencesBundle:Default:getEdit }
+panel_user_settings_save:
+    path:  /save
+    defaults: { _controller: SopinetUserPreferencesBundle:Default:getSave }

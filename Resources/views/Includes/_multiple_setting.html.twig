@@ -3,7 +3,7 @@
 		{% for value in setting.optionsarr %}
 			<label>
 				<input
-					{% for user_value in (app.user.sopinetuserextend|getUserValue(setting)) %}
+					{% for user_value in (app.user|getUserValue(setting)) %}
 						{% if user_value == value %}checked="checked" {% endif %}
 					{% endfor %}
 					name="multisetting_{{ setting.id }}_{{value}}" type="checkbox" class="ace" value="{{value}}"
