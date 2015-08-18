@@ -1,8 +1,6 @@
-UserNotificationsBundle
-========================
+[![Project Status: Unsupported - The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](http://www.repostatus.org/badges/0.1.0/unsupported.svg)](http://www.repostatus.org/#unsupported)
 
-Bundle para Symfony2 para añadir notificaciones
+This Project Has Been Deprecated
+================================
 
-TRAZEO
-======
-Desarrollo financiado, inicialmente, gracias a la campaña de CrowdFunding del proyecto Trazeo.
+Take a look to https://github.com/dmishh/SettingsBundle
